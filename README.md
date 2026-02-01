@@ -61,31 +61,23 @@ See: `THREAT_MODEL.md`
 
 ## Quickstart
 
-> **Note (Windows):** activate the virtual environment before running commands:
+> **Note (Windows):** activate the virtual environment before running commands:  
 > `.\.venv\Scripts\activate`
 
 ### Install dependency
 ```bash
 python -m pip install pynacl
-bash
 
-### Sign a skill file
-'''bash
-python sie_sign.py --issuer palxislabs --infile SKILL.md --deny-prompt-disclosure --no-external-urls --max-output-tokens 1200
-bash
+python sie_sign.py \
+  --issuer palxislabs \
+  --infile SKILL.md \
+  --deny-prompt-disclosure \
+  --no-external-urls \
+  --max-output-tokens 1200
 
-### Verify the envelope
-'''bash
 python sie_verify.py --file SKILL.md.sie.json
-bash
 
-### Verify + bind to the on-disk skill file (detects tampering)
-'''bash
 python sie_verify.py --file SKILL.md.sie.json --check-file SKILL.md
-bash
 
-### Demo: Indirect prompt injection is blocked
-'''bash
 python demo/run_demo.py
-bash
-
+'''
