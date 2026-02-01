@@ -6,11 +6,11 @@ import json
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-
 from pathlib import Path
 
 from sie_lib import verify_envelope
 
+from sie_policy import evaluate_untrusted_content
 
 def load_trusted_instructions(envelope_path: Path) -> dict:
     env = json.loads(envelope_path.read_text(encoding="utf-8"))
@@ -45,18 +45,6 @@ def load_trusted_instructions(envelope_path: Path) -> dict:
     return env
 
 
-def is_prompt_disclosure_attempt(text: str) -> bool:
-    # MVP-grade policy gate (simple pattern checks)
-    needles = [
-        "system prompt", "print your system", "reveal your prompt",
-        "list all tool", "tool names", "routing logic", "how you work",
-        "internal instructions", "show hidden policies", "developer message",
-        "BANANA_CODE_ALPHA", "verification string"
-    ]
-    t = text.lower()
-    return any(n.lower() in t for n in needles)
-
-
 def main() -> int:
     repo_root = Path(__file__).resolve().parents[1]
     envelope_path = repo_root / "SKILL.md.sie.json"
@@ -79,11 +67,17 @@ def main() -> int:
     print()
 
     print("=== DEMO DECISION ===")
-    if deny_disclosure and is_prompt_disclosure_attempt(untrusted_content):
-        print("[BLOCKED] Untrusted content attempted prompt/tool disclosure or verification-token exfiltration.")
+    decision = evaluate_untrusted_content(
+        untrusted_content=untrusted_content,
+        constraints=constraints,
+        extra_patterns=("BANANA_CODE_ALPHA",),  # demo-only token to show blocking
+    )
+
+    if not decision.allowed:
+        print(f"[BLOCKED] {decision.reason}")
         print("Refusing those actions per signed constraints.")
     else:
-        print("[ALLOW] No disclosure attempt detected (or policy not enabled).")
+        print("[ALLOW] " + decision.reason)
         print("Proceed to summarize content safely (not implemented in MVP).")
 
     print()
