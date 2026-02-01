@@ -58,16 +58,16 @@ See: `THREAT_MODEL.md`
 - `demo/` — indirect injection demo
 
 ---
-
 ## Quickstart
 
 > **Note (Windows):** activate the virtual environment before running commands:  
 > `.\.venv\Scripts\activate`
 
-### Install dependency
 ```bash
+# Install dependency
 python -m pip install pynacl
 
+# Sign a skill file
 python sie_sign.py \
   --issuer palxislabs \
   --infile SKILL.md \
@@ -75,9 +75,12 @@ python sie_sign.py \
   --no-external-urls \
   --max-output-tokens 1200
 
+# Verify the envelope
 python sie_verify.py --file SKILL.md.sie.json
 
+# Verify + bind to the on-disk skill file (detects tampering)
 python sie_verify.py --file SKILL.md.sie.json --check-file SKILL.md
 
+# Demo: Indirect prompt injection is blocked
 python demo/run_demo.py
-'''
+```
