@@ -16,6 +16,7 @@ instr = load_verified_instructions(
     keyring_path=Path("trusted_issuers.json"),
     check_file_path=Path("SKILL.md"),  # optional tamper detection
 )
+```
 
 ## 2) Channel separation (instructions vs content)
 Treat signed envelopes as INSTRUCTIONS (control-plane)
@@ -23,7 +24,6 @@ Treat documents/emails/code/tool output as CONTENT (data-plane)
 CONTENT must not override policy or introduce new directives
 
 ## 3) Indirect injection blocking (MVP policy gate)
-
 Use:
 -'sie_policy.py'
 
@@ -34,8 +34,9 @@ decision = evaluate_untrusted_content(
     untrusted_content=email_text,
     constraints=instr.constraints,
 )
+```
 
-Recommended framework hook points
+## Recommended framework hook points
 
 Before loading any skill/memory/instruction file:
     verify envelope, check issuer trust, fail closed
