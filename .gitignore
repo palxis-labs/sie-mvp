@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+
+# SIE private keys (NEVER COMMIT)
+.sie_private_key.b64
+.sie_private_key.b64.pub
