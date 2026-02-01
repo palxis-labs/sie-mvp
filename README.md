@@ -61,6 +61,9 @@ See: `THREAT_MODEL.md`
 
 ## Quickstart
 
+> **Note (Windows):** activate the virtual environment before running commands:
+> `.\.venv\Scripts\activate`
+
 ### Install dependency
 ```bash
 python -m pip install pynacl
