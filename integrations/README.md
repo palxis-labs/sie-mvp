@@ -25,7 +25,7 @@ CONTENT must not override policy or introduce new directives
 
 ## 3) Indirect injection blocking (MVP policy gate)
 Use:
--'sie_policy.py'
+- `sie_policy.py`
 
 Example:
 ```python
