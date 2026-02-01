@@ -1,5 +1,8 @@
 # Threat Model (v0.1) — Signed Instruction Envelope (SIE)
 
+_Last updated to include indirect injection and prompt disclosure risks observed in OpenClaw-style agent frameworks._
+
+
 ## Goal
 Prevent agents and humans from executing or trusting modified or untrusted instruction artifacts (e.g., SKILL.md),
 by requiring cryptographic integrity + publisher authentication and enforcing fail-closed verification.
