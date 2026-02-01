@@ -10,3 +10,6 @@ __pycache__/
 # SIE private keys (NEVER COMMIT)
 .sie_private_key.b64
 .sie_private_key.b64.pub
+
+# Packaging artifacts
+*.egg-info/
