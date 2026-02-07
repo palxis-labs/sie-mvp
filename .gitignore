@@ -13,3 +13,9 @@ __pycache__/
 
 # Packaging artifacts
 *.egg-info/
+
+# Registry root signing key (NEVER COMMIT)
+.registry_root_private_key.b64
+
+# Local caches
+.cache/
