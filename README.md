@@ -87,3 +87,5 @@ python sie_verify.py --file SKILL.md.sie.json --check-file SKILL.md
 ```bash
 python demo/run_demo.py
 ```
+## License
+MIT
