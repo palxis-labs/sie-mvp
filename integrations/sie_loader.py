@@ -7,7 +7,7 @@ from typing import Any, Dict, Optional
 
 from sie_lib import verify_envelope
 from sie_policy import require_instruction_channel
-
+from sie_registry_client import RegistryClient
 
 @dataclass(frozen=True)
 class LoadedInstruction:
@@ -48,10 +48,21 @@ def load_verified_instructions(
     if not issuer:
         raise ValueError("Envelope missing issuer")
 
+    # 1) Registry presence check (objective)
+    reg = RegistryClient(registry_dir=Path("registry"))
+    if not reg.is_issuer_present(issuer):
+        raise ValueError(f"Issuer '{issuer}' not present in registry snapshot")
+
+    # 2) Local keyring lookup
     keyring = load_keyring(keyring_path)
     pub = keyring.get(issuer)
     if not pub:
-        raise ValueError(f"Issuer '{issuer}' is not trusted")
+        raise ValueError(f"Issuer '{issuer}' missing from local keyring")
+
+    # 3) Revocation check
+    if reg.is_key_revoked(issuer, pub):
+        raise ValueError(f"Issuer '{issuer}' key revoked in registry")
+
 
     verify_envelope(env, pub)
 
