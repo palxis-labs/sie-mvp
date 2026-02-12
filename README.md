@@ -64,6 +64,7 @@ See: `THREAT_MODEL.md`
 - `docs/FAILURE_MODES.md` — verifier failures and operator actions
 - `docs/VALIDATION.md` — reproducible verification commands + expected outputs
 - `docs/OPENCLAW_INTEGRATION.md` — OpenClaw loader enforcement integration plan
+- `docs/IMPLEMENTATION_TICKETS.md` — implementation-ready ticket breakdown
 
 ---
 ## Quickstart
