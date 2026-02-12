@@ -5,6 +5,13 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+REASON_SIE_DISABLED = "sie_disabled"
+REASON_SKILL_NOT_FOUND = "skill_not_found"
+REASON_UNSIGNED_STRICT = "unsigned_strict"
+REASON_UNSIGNED_WARN = "unsigned_warn"
+REASON_VERIFY_FAILED = "verify_failed"
+REASON_VERIFIED = "verified"
+
 
 @dataclass(frozen=True)
 class EnforcementDecision:
@@ -44,16 +51,16 @@ def evaluate_skill(
         raise ValueError("mode must be 'warn' or 'strict'")
 
     if not skill_file.exists():
-        return EnforcementDecision(False, "skill_not_found", f"skill file not found: {skill_file}")
+        return EnforcementDecision(False, REASON_SKILL_NOT_FOUND, f"skill file not found: {skill_file}")
 
     envelope = Path(f"{skill_file}{envelope_suffix}")
     if not envelope.exists():
         if mode == "strict":
-            return EnforcementDecision(False, "unsigned_strict", "unsigned skill rejected (strict mode)")
-        return EnforcementDecision(True, "unsigned_warn", "unsigned skill allowed (warn mode)")
+            return EnforcementDecision(False, REASON_UNSIGNED_STRICT, "unsigned skill rejected (strict mode)")
+        return EnforcementDecision(True, REASON_UNSIGNED_WARN, "unsigned skill allowed (warn mode)")
 
     ok, detail = _run_verify(verify_script, envelope, trusted_issuers, skill_file)
     if not ok:
-        return EnforcementDecision(False, "verify_failed", detail)
+        return EnforcementDecision(False, REASON_VERIFY_FAILED, detail)
 
-    return EnforcementDecision(True, "verified", "signed skill verified")
+    return EnforcementDecision(True, REASON_VERIFIED, "signed skill verified")

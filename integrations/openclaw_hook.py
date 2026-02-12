@@ -4,7 +4,11 @@ from pathlib import Path
 from typing import Any, Dict
 
 from integrations.openclaw_sie_config import parse_sie_runtime_config
-from integrations.sie_enforcement import EnforcementDecision, evaluate_skill
+from integrations.sie_enforcement import (
+    REASON_SIE_DISABLED,
+    EnforcementDecision,
+    evaluate_skill,
+)
 
 
 def enforce_skill_from_openclaw_config(
@@ -28,7 +32,7 @@ def enforce_skill_from_openclaw_config(
 
     cfg = parse_sie_runtime_config(config, base_dir=base)
     if not cfg.enabled:
-        return EnforcementDecision(True, "sie_disabled", "SIE disabled; allowing skill")
+        return EnforcementDecision(True, REASON_SIE_DISABLED, "SIE disabled; allowing skill")
 
     return evaluate_skill(
         skill,
