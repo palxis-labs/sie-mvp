@@ -74,6 +74,7 @@ See: `THREAT_MODEL.md`
 - `docs/SECURITY_CLAIMS.md` — accurate claim boundaries (anti-hype)
 - `docs/MAINTAINER_CHECKLIST.md` — pre-release maintainer checklist
 - `docs/CI_INTEGRATION.md` — CI gate setup for signed artifact verification
+- `docs/CONTRIBUTING_SECURITY.md` — security-focused contribution guardrails
 
 ---
 ## Quickstart
