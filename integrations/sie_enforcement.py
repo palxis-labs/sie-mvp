@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 
@@ -11,6 +11,9 @@ class EnforcementDecision:
     allowed: bool
     reason: str
     detail: str = ""
+
+    def to_dict(self) -> dict:
+        return asdict(self)
 
 
 def _run_verify(verify_script: Path, envelope: Path, trusted_issuers: Path, skill_file: Path) -> tuple[bool, str]:

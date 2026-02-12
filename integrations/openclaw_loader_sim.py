@@ -1,4 +1,5 @@
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -18,6 +19,7 @@ def main() -> int:
     p.add_argument("--verify-script", default="sie_verify.py", help="Path to verifier script")
     p.add_argument("--trusted-issuers", default="trusted_issuers.json", help="Path to trusted issuers keyring")
     p.add_argument("--envelope-suffix", default=".sie.json", help="Envelope suffix (default: .sie.json)")
+    p.add_argument("--json", action="store_true", help="Emit decision as JSON")
 
     args = p.parse_args()
 
@@ -28,6 +30,10 @@ def main() -> int:
         trusted_issuers=Path(args.trusted_issuers),
         envelope_suffix=args.envelope_suffix,
     )
+
+    if args.json:
+        print(json.dumps(decision.to_dict(), ensure_ascii=False))
+        return 0 if decision.allowed else 2
 
     if decision.allowed:
         print(f"ALLOW: {decision.detail}")

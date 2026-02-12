@@ -17,21 +17,25 @@ class TestLoaderSimulation(unittest.TestCase):
         cls.skill_src = cls.root / "SKILL.md"
         cls.env_src = cls.root / "SKILL.md.sie.json"
 
-    def run_loader(self, skill_path: Path, mode: str):
+    def run_loader(self, skill_path: Path, mode: str, *, json_out: bool = False):
+        cmd = [
+            self.python,
+            "-m",
+            self.loader_module,
+            "--skill",
+            str(skill_path),
+            "--mode",
+            mode,
+            "--verify-script",
+            str(self.verify),
+            "--trusted-issuers",
+            str(self.keyring),
+        ]
+        if json_out:
+            cmd.append("--json")
+
         return subprocess.run(
-            [
-                self.python,
-                "-m",
-                self.loader_module,
-                "--skill",
-                str(skill_path),
-                "--mode",
-                mode,
-                "--verify-script",
-                str(self.verify),
-                "--trusted-issuers",
-                str(self.keyring),
-            ],
+            cmd,
             cwd=self.root,
             capture_output=True,
             text=True,
@@ -85,6 +89,19 @@ class TestLoaderSimulation(unittest.TestCase):
         finally:
             tmp_skill.unlink(missing_ok=True)
             tmp_env.unlink(missing_ok=True)
+
+    def test_json_output_shape(self):
+        tmp_skill = self.root / "tests" / "tmp_unsigned_json_skill.md"
+        try:
+            tmp_skill.write_text("# unsigned\n", encoding="utf-8")
+            r = self.run_loader(tmp_skill, "warn", json_out=True)
+            self.assertEqual(r.returncode, 0, msg=r.stdout + r.stderr)
+            payload = json.loads(r.stdout)
+            self.assertTrue(payload["allowed"])
+            self.assertEqual(payload["reason"], "unsigned_warn")
+            self.assertIn("warn mode", payload["detail"])
+        finally:
+            tmp_skill.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
