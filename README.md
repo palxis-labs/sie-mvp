@@ -57,6 +57,14 @@ See: `THREAT_MODEL.md`
 - `trusted_issuers.json` — trusted issuer public keys (keyring)
 - `demo/` — indirect injection demo
 
+## Operator docs
+
+- `docs/SECURITY_QUICKSTART.md` — 5-minute safety setup
+- `docs/OPERATOR_CHECKLIST.md` — rollout + incident response checklist
+- `docs/FAILURE_MODES.md` — verifier failures and operator actions
+- `docs/VALIDATION.md` — reproducible verification commands + expected outputs
+- `docs/OPENCLAW_INTEGRATION.md` — OpenClaw loader enforcement integration plan
+
 ---
 ## Quickstart
 
