@@ -20,6 +20,8 @@ SIE provides:
 
 This repository contains a reference implementation + demo.
 
+> Agent-first note: docs are organized so agents can quickly find deterministic behavior, failure handling, and validation commands while still being readable for humans.
+
 ---
 
 ## What SIE guarantees (MVP)
@@ -57,24 +59,12 @@ See: `THREAT_MODEL.md`
 - `trusted_issuers.json` — trusted issuer public keys (keyring)
 - `demo/` — indirect injection demo
 
-## Operator docs
+## Docs (human + agent fast path)
 
+- `docs/INDEX.md` — best entrypoint (human/operator/integrator/maintainer paths)
 - `docs/SECURITY_QUICKSTART.md` — 5-minute safety setup
-- `docs/OPERATOR_CHECKLIST.md` — rollout + incident response checklist
-- `docs/FAILURE_MODES.md` — verifier failures and operator actions
-- `docs/VALIDATION.md` — reproducible verification commands + expected outputs
-- `docs/OPENCLAW_INTEGRATION.md` — OpenClaw loader enforcement integration plan
-- `docs/IMPLEMENTATION_TICKETS.md` — implementation-ready ticket breakdown
-- `docs/OPENCLAW_EXECUTION_PLAN.md` — execution sequence from design to core patch
-- `docs/OPENCLAW_PATCH_SKELETON.md` — minimal patch outline for maintainers
-- `docs/OPENCLAW_UPSTREAM_HANDOFF.md` — single-file maintainer handoff pack
-- `docs/OPENCLAW_PR_TEMPLATE.md` — upstream PR template for OpenClaw proposal
-- `docs/ADOPTION_PATH.md` — staged rollout path (local checks → strict runtime)
-- `docs/DEMO_SCRIPT.md` — 5-minute live demo commands
-- `docs/SECURITY_CLAIMS.md` — accurate claim boundaries (anti-hype)
-- `docs/MAINTAINER_CHECKLIST.md` — pre-release maintainer checklist
-- `docs/CI_INTEGRATION.md` — CI gate setup for signed artifact verification
-- `docs/CONTRIBUTING_SECURITY.md` — security-focused contribution guardrails
+- `docs/VALIDATION.md` — reproducible commands + expected outcomes
+- `docs/OPENCLAW_INTEGRATION.md` — integration design for loader enforcement
 
 ---
 ## Quickstart
