@@ -23,10 +23,11 @@ Make trusted agent instructions practical by default: signed, verifiable, fail-c
 - [ ] Optional transparency/audit logs for trust decisions
 - [ ] Signed policy bundles for channel separation controls
 
-## Business Track (parallel)
-- [ ] Publish OSS core with adoption-first docs
-- [ ] Validate demand via integration support and trust hardening help
-- [ ] Test enterprise offerings (registry, compliance logs, policy management)
+## Commercial Note
+Commercial planning is maintained privately and is intentionally out of scope for this public roadmap.
+
+## Scope Note
+Public roadmap focuses on technical/security delivery. Private commercial strategy is intentionally tracked outside this repository.
 
 ## Principles
 - Minimize trust assumptions

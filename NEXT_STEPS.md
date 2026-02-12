@@ -33,10 +33,10 @@ Ship practical, adoptable SIE improvements that reduce real skill supply-chain r
 - [ ] Add "How to validate this claim" section (commands + expected outputs).
 - [ ] Prepare short social summary + long technical version.
 
-## Day 7 — Revenue Alignment Checkpoint
-- [ ] Choose first monetization experiment (hosted trust registry / enterprise policy pack / integration support).
-- [ ] Define 2-week MVP scope and success metrics.
-- [ ] Commit to one distribution channel for discovery.
+## Day 7 — Release Readiness Checkpoint
+- [ ] Confirm docs + examples are reproducible by a first-time user.
+- [ ] Define v0.2 scope and objective pass/fail criteria.
+- [ ] Publish a small milestone summary for community feedback.
 
 ---
 
@@ -45,3 +45,4 @@ Ship practical, adoptable SIE improvements that reduce real skill supply-chain r
 - Security claims must be precise and testable.
 - Keep defaults safe for beginners.
 - Every change should improve either trust, adoption, or speed-to-deploy.
+- Private commercial strategy is tracked outside this public repo.
