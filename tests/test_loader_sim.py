@@ -11,7 +11,7 @@ class TestLoaderSimulation(unittest.TestCase):
     def setUpClass(cls):
         cls.root = Path(__file__).resolve().parents[1]
         cls.python = sys.executable
-        cls.loader = cls.root / "integrations" / "openclaw_loader_sim.py"
+        cls.loader_module = "integrations.openclaw_loader_sim"
         cls.verify = cls.root / "sie_verify.py"
         cls.keyring = cls.root / "trusted_issuers.json"
         cls.skill_src = cls.root / "SKILL.md"
@@ -21,7 +21,8 @@ class TestLoaderSimulation(unittest.TestCase):
         return subprocess.run(
             [
                 self.python,
-                str(self.loader),
+                "-m",
+                self.loader_module,
                 "--skill",
                 str(skill_path),
                 "--mode",
@@ -41,8 +42,8 @@ class TestLoaderSimulation(unittest.TestCase):
         try:
             tmp_skill.write_text("# unsigned\n", encoding="utf-8")
             r = self.run_loader(tmp_skill, "warn")
-            self.assertEqual(r.returncode, 0)
-            self.assertIn("ALLOW", r.stdout)
+            self.assertEqual(r.returncode, 0, msg=r.stdout + r.stderr)
+            self.assertIn("ALLOW", r.stdout, msg=r.stdout + r.stderr)
         finally:
             tmp_skill.unlink(missing_ok=True)
 
@@ -51,8 +52,8 @@ class TestLoaderSimulation(unittest.TestCase):
         try:
             tmp_skill.write_text("# unsigned\n", encoding="utf-8")
             r = self.run_loader(tmp_skill, "strict")
-            self.assertNotEqual(r.returncode, 0)
-            self.assertIn("REJECT", r.stdout)
+            self.assertNotEqual(r.returncode, 0, msg=r.stdout + r.stderr)
+            self.assertIn("REJECT", r.stdout, msg=r.stdout + r.stderr)
         finally:
             tmp_skill.unlink(missing_ok=True)
 
@@ -64,7 +65,7 @@ class TestLoaderSimulation(unittest.TestCase):
             shutil.copyfile(self.env_src, tmp_env)
             r = self.run_loader(tmp_skill, "strict")
             self.assertEqual(r.returncode, 0, msg=r.stdout + r.stderr)
-            self.assertIn("ALLOW: signed skill verified", r.stdout)
+            self.assertIn("ALLOW: signed skill verified", r.stdout, msg=r.stdout + r.stderr)
         finally:
             tmp_skill.unlink(missing_ok=True)
             tmp_env.unlink(missing_ok=True)
@@ -79,8 +80,8 @@ class TestLoaderSimulation(unittest.TestCase):
             tmp_env.write_text(json.dumps(env), encoding="utf-8")
 
             r = self.run_loader(tmp_skill, "strict")
-            self.assertNotEqual(r.returncode, 0)
-            self.assertIn("REJECT", r.stdout)
+            self.assertNotEqual(r.returncode, 0, msg=r.stdout + r.stderr)
+            self.assertIn("REJECT", r.stdout, msg=r.stdout + r.stderr)
         finally:
             tmp_skill.unlink(missing_ok=True)
             tmp_env.unlink(missing_ok=True)
