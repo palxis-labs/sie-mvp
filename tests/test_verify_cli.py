@@ -53,7 +53,7 @@ class TestVerifyCli(unittest.TestCase):
         self.assertEqual(r.returncode, 0, msg=r.stdout + r.stderr)
         self.assertIn("[OK]", r.stdout)
 
-    def test_payload_issuer_fallback_works(self):
+    def test_payload_issuer_without_top_level_fails_signature(self):
         env = json.loads(self.env_file.read_text(encoding="utf-8"))
         issuer = env.get("issuer")
         env.pop("issuer", None)
@@ -66,8 +66,8 @@ class TestVerifyCli(unittest.TestCase):
                 "--file", str(tmp_env),
                 "--trusted-issuers", str(self.keyring),
             )
-            self.assertEqual(r.returncode, 0, msg=r.stdout + r.stderr)
-            self.assertIn("[OK]", r.stdout)
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn("bad signature", (r.stdout + r.stderr).lower())
         finally:
             tmp_env.unlink(missing_ok=True)
 

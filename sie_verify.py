@@ -69,7 +69,9 @@ def main() -> int:
             if not cf.exists():
                 raise SystemExit(f"Check file not found: {cf}")
 
-            disk_hash = hashlib.sha256(cf.read_bytes()).hexdigest()
+            # Hash text content with UTF-8 to stay consistent with signing flow
+            # across platforms/checkouts (e.g., Windows CRLF conversions).
+            disk_hash = hashlib.sha256(cf.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
             env_hash = env.get("payload", {}).get("sha256")
 
             if not env_hash:
