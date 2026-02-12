@@ -1,0 +1,90 @@
+import json
+import shutil
+import subprocess
+import sys
+import unittest
+from pathlib import Path
+
+
+class TestLoaderSimulation(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(__file__).resolve().parents[1]
+        cls.python = sys.executable
+        cls.loader = cls.root / "integrations" / "openclaw_loader_sim.py"
+        cls.verify = cls.root / "sie_verify.py"
+        cls.keyring = cls.root / "trusted_issuers.json"
+        cls.skill_src = cls.root / "SKILL.md"
+        cls.env_src = cls.root / "SKILL.md.sie.json"
+
+    def run_loader(self, skill_path: Path, mode: str):
+        return subprocess.run(
+            [
+                self.python,
+                str(self.loader),
+                "--skill",
+                str(skill_path),
+                "--mode",
+                mode,
+                "--verify-script",
+                str(self.verify),
+                "--trusted-issuers",
+                str(self.keyring),
+            ],
+            cwd=self.root,
+            capture_output=True,
+            text=True,
+        )
+
+    def test_unsigned_warn_allows(self):
+        tmp_skill = self.root / "tests" / "tmp_unsigned_warn_skill.md"
+        try:
+            tmp_skill.write_text("# unsigned\n", encoding="utf-8")
+            r = self.run_loader(tmp_skill, "warn")
+            self.assertEqual(r.returncode, 0)
+            self.assertIn("ALLOW", r.stdout)
+        finally:
+            tmp_skill.unlink(missing_ok=True)
+
+    def test_unsigned_strict_rejects(self):
+        tmp_skill = self.root / "tests" / "tmp_unsigned_strict_skill.md"
+        try:
+            tmp_skill.write_text("# unsigned\n", encoding="utf-8")
+            r = self.run_loader(tmp_skill, "strict")
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn("REJECT", r.stdout)
+        finally:
+            tmp_skill.unlink(missing_ok=True)
+
+    def test_signed_valid_allows(self):
+        tmp_skill = self.root / "tests" / "tmp_signed_skill.md"
+        tmp_env = Path(f"{tmp_skill}.sie.json")
+        try:
+            shutil.copyfile(self.skill_src, tmp_skill)
+            shutil.copyfile(self.env_src, tmp_env)
+            r = self.run_loader(tmp_skill, "strict")
+            self.assertEqual(r.returncode, 0, msg=r.stdout + r.stderr)
+            self.assertIn("ALLOW: signed skill verified", r.stdout)
+        finally:
+            tmp_skill.unlink(missing_ok=True)
+            tmp_env.unlink(missing_ok=True)
+
+    def test_signed_invalid_rejects(self):
+        tmp_skill = self.root / "tests" / "tmp_tampered_skill.md"
+        tmp_env = Path(f"{tmp_skill}.sie.json")
+        try:
+            shutil.copyfile(self.skill_src, tmp_skill)
+            env = json.loads(self.env_src.read_text(encoding="utf-8"))
+            env["payload"]["content"] += "\n# tamper\n"
+            tmp_env.write_text(json.dumps(env), encoding="utf-8")
+
+            r = self.run_loader(tmp_skill, "strict")
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn("REJECT", r.stdout)
+        finally:
+            tmp_skill.unlink(missing_ok=True)
+            tmp_env.unlink(missing_ok=True)
+
+
+if __name__ == "__main__":
+    unittest.main()
