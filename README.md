@@ -72,24 +72,34 @@ See: `THREAT_MODEL.md`
 > **Windows PowerShell:** `& .\.venv\Scripts\Activate.ps1`  
 > **Linux/macOS:** `source .venv/bin/activate`
 
-### Install dependency
+### Install package (recommended)
 ```bash
-python -m pip install pynacl
+python3 -m pip install .
+```
+
+### Dev install
+```bash
+python3 -m pip install -e .
 ```
 
 ### Sign a skill file
 ```bash
-python sie_sign.py --issuer palxislabs --infile SKILL.md
+python3 sie_sign.py --issuer palxislabs --infile SKILL.md
 ```
 
 ### Verify the envelope with trusted issuers
 ```bash
-python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json
+python3 sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json
 ```
 
 ### Verify + bind to on-disk file (tamper detection)
 ```bash
-python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+python3 sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+```
+
+### Installed CLI entrypoint (after `pip install .`)
+```bash
+sie-verify --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
 ```
 
 ## Helper scripts (recommended)
@@ -110,7 +120,7 @@ python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.
 
 ### Demo: Indirect prompt injection is blocked
 ```bash
-python demo/run_demo.py
+python3 demo/run_demo.py
 ```
 
 ## License

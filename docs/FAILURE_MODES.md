@@ -123,3 +123,12 @@ Map common SIE verification failures to clear operator actions.
 - Migration default: warn mode + deadline to strict mode
 - Never suppress verification failures silently
 - Log: skill path, mode, envelope presence, result, reason
+
+---
+
+## Last behavior check (2026-02-14 17:10 UTC)
+Validated against live verifier output (`docs/validation-failure-modes-20260214-1710Z.log`):
+- Baseline verification success -> exit `0`, `[OK] Signature verified and basic checks passed.`
+- Untrusted issuer -> exit `2`, `[FAIL] Issuer 'palxislabs' is not trusted.`
+- Malformed envelope JSON -> exit `3`, `[FAIL] Envelope file is not valid JSON: ...`
+- Missing `--check-file` target -> exit `3`, `[FAIL] Check file not found: ...`

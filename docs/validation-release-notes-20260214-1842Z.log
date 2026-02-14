@@ -1,0 +1,49 @@
+# SIE validation run 20260214-1842Z
+$ .venv/bin/python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+[OK] Signature verified and basic checks passed.
+$ .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+test_tampered_envelope_fails (test_crypto.TestCryptoVerification.test_tampered_envelope_fails) ... ok
+test_valid_signature_verifies (test_crypto.TestCryptoVerification.test_valid_signature_verifies) ... ok
+test_public_exports (test_integration_api.TestIntegrationApi.test_public_exports) ... ok
+test_reason_constants_exported (test_integration_api.TestIntegrationApi.test_reason_constants_exported) ... ok
+test_config_overrides_cli_mode (test_loader_sim.TestLoaderSimulation.test_config_overrides_cli_mode) ... ok
+test_json_output_shape (test_loader_sim.TestLoaderSimulation.test_json_output_shape) ... ok
+test_signed_invalid_rejects (test_loader_sim.TestLoaderSimulation.test_signed_invalid_rejects) ... ok
+test_signed_valid_allows (test_loader_sim.TestLoaderSimulation.test_signed_valid_allows) ... ok
+test_unsigned_strict_rejects (test_loader_sim.TestLoaderSimulation.test_unsigned_strict_rejects) ... ok
+test_unsigned_warn_allows (test_loader_sim.TestLoaderSimulation.test_unsigned_warn_allows) ... ok
+test_sie_disabled_allows (test_openclaw_hook.TestOpenclawHook.test_sie_disabled_allows) ... ok
+test_sie_enabled_strict_allows_valid_signed (test_openclaw_hook.TestOpenclawHook.test_sie_enabled_strict_allows_valid_signed) ... ok
+test_sie_enabled_strict_rejects_invalid_signed (test_openclaw_hook.TestOpenclawHook.test_sie_enabled_strict_rejects_invalid_signed) ... ok
+test_sie_enabled_strict_rejects_unsigned (test_openclaw_hook.TestOpenclawHook.test_sie_enabled_strict_rejects_unsigned) ... ok
+test_load_allows_valid_signed (test_openclaw_loader_reference.TestOpenclawLoaderReference.test_load_allows_valid_signed) ... ok
+test_load_rejects_invalid_signed (test_openclaw_loader_reference.TestOpenclawLoaderReference.test_load_rejects_invalid_signed) ... ok
+test_load_rejects_unsigned_strict (test_openclaw_loader_reference.TestOpenclawLoaderReference.test_load_rejects_unsigned_strict) ... ok
+test_defaults_when_missing (test_openclaw_sie_config.TestOpenclawSieConfig.test_defaults_when_missing) ... ok
+test_explicit_strict_config (test_openclaw_sie_config.TestOpenclawSieConfig.test_explicit_strict_config) ... ok
+test_load_from_file (test_openclaw_sie_config.TestOpenclawSieConfig.test_load_from_file) ... ok
+test_allows_safe_content (test_policy.TestPolicy.test_allows_safe_content) ... ok
+test_blocks_prompt_disclosure (test_policy.TestPolicy.test_blocks_prompt_disclosure) ... ok
+test_policy_disabled_allows (test_policy.TestPolicy.test_policy_disabled_allows) ... ok
+test_allows_valid_signed (test_sie_enforcement.TestSieEnforcement.test_allows_valid_signed) ... ok
+test_rejects_invalid_signed (test_sie_enforcement.TestSieEnforcement.test_rejects_invalid_signed) ... ok
+test_strict_rejects_unsigned (test_sie_enforcement.TestSieEnforcement.test_strict_rejects_unsigned) ... ok
+test_warn_allows_unsigned (test_sie_enforcement.TestSieEnforcement.test_warn_allows_unsigned) ... ok
+test_manifest_has_no_missing_files (test_upstream_patch_bundle.TestUpstreamPatchBundle.test_manifest_has_no_missing_files) ... ok
+test_payload_contains_behavior_and_file_list (test_upstream_pr_payload.TestUpstreamPrPayload.test_payload_contains_behavior_and_file_list) ... ok
+test_bad_trusted_issuer_format_fails_with_input_error (test_verify_cli.TestVerifyCli.test_bad_trusted_issuer_format_fails_with_input_error) ... ok
+test_hash_mismatch_fails (test_verify_cli.TestVerifyCli.test_hash_mismatch_fails) ... ok
+test_malformed_envelope_json_fails_with_input_error (test_verify_cli.TestVerifyCli.test_malformed_envelope_json_fails_with_input_error) ... ok
+test_missing_check_file_fails_with_input_error (test_verify_cli.TestVerifyCli.test_missing_check_file_fails_with_input_error) ... ok
+test_missing_envelope_file_fails_with_input_error (test_verify_cli.TestVerifyCli.test_missing_envelope_file_fails_with_input_error) ... ok
+test_missing_issuer_fails (test_verify_cli.TestVerifyCli.test_missing_issuer_fails) ... ok
+test_payload_issuer_without_top_level_fails_signature (test_verify_cli.TestVerifyCli.test_payload_issuer_without_top_level_fails_signature) ... ok
+test_untrusted_issuer_fails (test_verify_cli.TestVerifyCli.test_untrusted_issuer_fails) ... ok
+test_verify_ok_with_check_file (test_verify_cli.TestVerifyCli.test_verify_ok_with_check_file) ... ok
+test_verify_ok_with_pubkey_override (test_verify_cli.TestVerifyCli.test_verify_ok_with_pubkey_override) ... ok
+test_verify_ok_with_trusted_issuers (test_verify_cli.TestVerifyCli.test_verify_ok_with_trusted_issuers) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 1.574s
+
+OK

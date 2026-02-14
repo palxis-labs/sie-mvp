@@ -1,0 +1,185 @@
+# clean install validation 20260214-1839Z
+Fallback: system python pip blocked by PEP668; using project .venv builder
+$ .venv/bin/python -m pip install --upgrade pip build
+Requirement already satisfied: pip in ./.venv/lib/python3.11/site-packages (26.0.1)
+Collecting build
+  Downloading build-1.4.0-py3-none-any.whl.metadata (5.8 kB)
+Collecting packaging>=24.0 (from build)
+  Using cached packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pyproject_hooks (from build)
+  Downloading pyproject_hooks-1.2.0-py3-none-any.whl.metadata (1.3 kB)
+Downloading build-1.4.0-py3-none-any.whl (24 kB)
+Using cached packaging-26.0-py3-none-any.whl (74 kB)
+Downloading pyproject_hooks-1.2.0-py3-none-any.whl (10 kB)
+Installing collected packages: pyproject_hooks, packaging, build
+
+Successfully installed build-1.4.0 packaging-26.0 pyproject_hooks-1.2.0
+$ .venv/bin/python -m build .
+running egg_info
+writing sie_mvp.egg-info/PKG-INFO
+writing dependency_links to sie_mvp.egg-info/dependency_links.txt
+writing entry points to sie_mvp.egg-info/entry_points.txt
+writing requirements to sie_mvp.egg-info/requires.txt
+writing top-level names to sie_mvp.egg-info/top_level.txt
+reading manifest file 'sie_mvp.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'sie_mvp.egg-info/SOURCES.txt'
+running sdist
+running egg_info
+writing sie_mvp.egg-info/PKG-INFO
+writing dependency_links to sie_mvp.egg-info/dependency_links.txt
+writing entry points to sie_mvp.egg-info/entry_points.txt
+writing requirements to sie_mvp.egg-info/requires.txt
+writing top-level names to sie_mvp.egg-info/top_level.txt
+reading manifest file 'sie_mvp.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'sie_mvp.egg-info/SOURCES.txt'
+running check
+creating sie_mvp-0.1.0
+creating sie_mvp-0.1.0/integrations
+creating sie_mvp-0.1.0/sie_mvp.egg-info
+creating sie_mvp-0.1.0/tests
+copying files to sie_mvp-0.1.0...
+copying LICENSE -> sie_mvp-0.1.0
+copying README.md -> sie_mvp-0.1.0
+copying pyproject.toml -> sie_mvp-0.1.0
+copying sie_lib.py -> sie_mvp-0.1.0
+copying sie_policy.py -> sie_mvp-0.1.0
+copying sie_registry_client.py -> sie_mvp-0.1.0
+copying sie_sign.py -> sie_mvp-0.1.0
+copying sie_verify.py -> sie_mvp-0.1.0
+copying integrations/__init__.py -> sie_mvp-0.1.0/integrations
+copying integrations/example_agent_wrapper.py -> sie_mvp-0.1.0/integrations
+copying integrations/openclaw_hook.py -> sie_mvp-0.1.0/integrations
+copying integrations/openclaw_loader_reference.py -> sie_mvp-0.1.0/integrations
+copying integrations/openclaw_loader_sim.py -> sie_mvp-0.1.0/integrations
+copying integrations/openclaw_sie_config.py -> sie_mvp-0.1.0/integrations
+copying integrations/sie_enforcement.py -> sie_mvp-0.1.0/integrations
+copying integrations/sie_loader.py -> sie_mvp-0.1.0/integrations
+copying integrations/upstream_patch_bundle.py -> sie_mvp-0.1.0/integrations
+copying integrations/upstream_pr_payload.py -> sie_mvp-0.1.0/integrations
+copying sie_mvp.egg-info/PKG-INFO -> sie_mvp-0.1.0/sie_mvp.egg-info
+copying sie_mvp.egg-info/SOURCES.txt -> sie_mvp-0.1.0/sie_mvp.egg-info
+copying sie_mvp.egg-info/dependency_links.txt -> sie_mvp-0.1.0/sie_mvp.egg-info
+copying sie_mvp.egg-info/entry_points.txt -> sie_mvp-0.1.0/sie_mvp.egg-info
+copying sie_mvp.egg-info/requires.txt -> sie_mvp-0.1.0/sie_mvp.egg-info
+copying sie_mvp.egg-info/top_level.txt -> sie_mvp-0.1.0/sie_mvp.egg-info
+copying tests/test_crypto.py -> sie_mvp-0.1.0/tests
+copying tests/test_integration_api.py -> sie_mvp-0.1.0/tests
+copying tests/test_loader_sim.py -> sie_mvp-0.1.0/tests
+copying tests/test_openclaw_hook.py -> sie_mvp-0.1.0/tests
+copying tests/test_openclaw_loader_reference.py -> sie_mvp-0.1.0/tests
+copying tests/test_openclaw_sie_config.py -> sie_mvp-0.1.0/tests
+copying tests/test_policy.py -> sie_mvp-0.1.0/tests
+copying tests/test_sie_enforcement.py -> sie_mvp-0.1.0/tests
+copying tests/test_upstream_patch_bundle.py -> sie_mvp-0.1.0/tests
+copying tests/test_upstream_pr_payload.py -> sie_mvp-0.1.0/tests
+copying tests/test_verify_cli.py -> sie_mvp-0.1.0/tests
+copying sie_mvp.egg-info/SOURCES.txt -> sie_mvp-0.1.0/sie_mvp.egg-info
+Writing sie_mvp-0.1.0/setup.cfg
+Creating tar archive
+removing 'sie_mvp-0.1.0' (and everything under it)
+running egg_info
+writing sie_mvp.egg-info/PKG-INFO
+writing dependency_links to sie_mvp.egg-info/dependency_links.txt
+writing entry points to sie_mvp.egg-info/entry_points.txt
+writing requirements to sie_mvp.egg-info/requires.txt
+writing top-level names to sie_mvp.egg-info/top_level.txt
+reading manifest file 'sie_mvp.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'sie_mvp.egg-info/SOURCES.txt'
+running bdist_wheel
+running build
+running build_py
+creating build/lib
+copying sie_lib.py -> build/lib
+copying sie_policy.py -> build/lib
+copying sie_registry_client.py -> build/lib
+copying sie_sign.py -> build/lib
+copying sie_verify.py -> build/lib
+creating build/lib/integrations
+copying integrations/openclaw_hook.py -> build/lib/integrations
+copying integrations/openclaw_loader_reference.py -> build/lib/integrations
+copying integrations/openclaw_sie_config.py -> build/lib/integrations
+copying integrations/example_agent_wrapper.py -> build/lib/integrations
+copying integrations/sie_loader.py -> build/lib/integrations
+copying integrations/openclaw_loader_sim.py -> build/lib/integrations
+copying integrations/sie_enforcement.py -> build/lib/integrations
+copying integrations/upstream_patch_bundle.py -> build/lib/integrations
+copying integrations/__init__.py -> build/lib/integrations
+copying integrations/upstream_pr_payload.py -> build/lib/integrations
+running egg_info
+writing sie_mvp.egg-info/PKG-INFO
+writing dependency_links to sie_mvp.egg-info/dependency_links.txt
+writing entry points to sie_mvp.egg-info/entry_points.txt
+writing requirements to sie_mvp.egg-info/requires.txt
+writing top-level names to sie_mvp.egg-info/top_level.txt
+reading manifest file 'sie_mvp.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'sie_mvp.egg-info/SOURCES.txt'
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64/wheel
+copying build/lib/sie_lib.py -> build/bdist.linux-x86_64/wheel/.
+copying build/lib/sie_sign.py -> build/bdist.linux-x86_64/wheel/.
+creating build/bdist.linux-x86_64/wheel/integrations
+copying build/lib/integrations/openclaw_hook.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/openclaw_loader_reference.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/openclaw_sie_config.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/example_agent_wrapper.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/sie_loader.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/openclaw_loader_sim.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/sie_enforcement.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/upstream_patch_bundle.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/__init__.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/integrations/upstream_pr_payload.py -> build/bdist.linux-x86_64/wheel/./integrations
+copying build/lib/sie_registry_client.py -> build/bdist.linux-x86_64/wheel/.
+copying build/lib/sie_verify.py -> build/bdist.linux-x86_64/wheel/.
+copying build/lib/sie_policy.py -> build/bdist.linux-x86_64/wheel/.
+running install_egg_info
+Copying sie_mvp.egg-info to build/bdist.linux-x86_64/wheel/./sie_mvp-0.1.0-py3.11.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/sie_mvp-0.1.0.dist-info/WHEEL
+creating '/home/bitnami/.openclaw/workspace/sie-mvp/dist/.tmp-w2a25vdq/sie_mvp-0.1.0-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+adding 'sie_lib.py'
+adding 'sie_policy.py'
+adding 'sie_registry_client.py'
+adding 'sie_sign.py'
+adding 'sie_verify.py'
+adding 'integrations/__init__.py'
+adding 'integrations/example_agent_wrapper.py'
+adding 'integrations/openclaw_hook.py'
+adding 'integrations/openclaw_loader_reference.py'
+adding 'integrations/openclaw_loader_sim.py'
+adding 'integrations/openclaw_sie_config.py'
+adding 'integrations/sie_enforcement.py'
+adding 'integrations/sie_loader.py'
+adding 'integrations/upstream_patch_bundle.py'
+adding 'integrations/upstream_pr_payload.py'
+adding 'sie_mvp-0.1.0.dist-info/licenses/LICENSE'
+adding 'sie_mvp-0.1.0.dist-info/METADATA'
+adding 'sie_mvp-0.1.0.dist-info/WHEEL'
+adding 'sie_mvp-0.1.0.dist-info/entry_points.txt'
+adding 'sie_mvp-0.1.0.dist-info/top_level.txt'
+adding 'sie_mvp-0.1.0.dist-info/RECORD'
+removing build/bdist.linux-x86_64/wheel
+Successfully built sie_mvp-0.1.0.tar.gz and sie_mvp-0.1.0-py3-none-any.whl
+$ python3 -m venv .tmp-release-venv
+$ .tmp-release-venv/bin/python -m pip install dist/*.whl
+Processing ./dist/sie_mvp-0.1.0-py3-none-any.whl
+Collecting pynacl>=1.6.0
+  Downloading pynacl-1.6.2-cp38-abi3-manylinux_2_34_x86_64.whl (1.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 30.8 MB/s eta 0:00:00
+Collecting cffi>=2.0.0
+  Downloading cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (215 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 215.6/215.6 kB 26.3 MB/s eta 0:00:00
+Collecting pycparser
+  Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.2/48.2 kB 6.8 MB/s eta 0:00:00
+Installing collected packages: pycparser, cffi, pynacl, sie-mvp
+Successfully installed cffi-2.0.0 pycparser-3.0 pynacl-1.6.2 sie-mvp-0.1.0
+$ .tmp-release-venv/bin/sie-verify --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+[OK] Signature verified and basic checks passed.
+$ .tmp-release-venv/bin/python -m sie_verify --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+[OK] Signature verified and basic checks passed.

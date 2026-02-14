@@ -17,8 +17,12 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/palxis-labs/sie-mvp"
 
+[project.scripts]
+sie-sign = "sie_sign:main"
+sie-verify = "sie_verify:main"
+
 [tool.setuptools]
-py-modules = ["sie_lib", "sie_policy", "sie_sign", "sie_verify"]
+py-modules = ["sie_lib", "sie_policy", "sie_registry_client", "sie_sign", "sie_verify"]
 
 [tool.setuptools.packages.find]
 where = ["."]

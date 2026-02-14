@@ -31,6 +31,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - `README.md` quickstart now uses trusted-issuer verification flow and references helper scripts + operator docs.
 - Public planning docs were sanitized to avoid exposing private commercial strategy.
+- Release hardening docs were synced with fresh evidence runs (verification + full unit suite) and current operator guidance:
+  - `docs/RELEASE_CHECKLIST.md`
+  - `docs/VALIDATION.md`
 
 ## v0.1.0 — Initial public release
 

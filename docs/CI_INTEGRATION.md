@@ -1,22 +1,34 @@
-# CI_INTEGRATION.md — Add SIE Verification to CI
+# CI_INTEGRATION.md — Add SIE Verification + Packaging Gates to CI
 
 ## Goal
-Fail CI when signed instruction artifacts are untrusted or tampered.
+Fail CI when signed instruction artifacts are untrusted/tampered or packaging/installability regresses.
 
-## Minimal GitHub Actions step
+## Required checks
 
-Add this after dependency install:
+1. Verify signed artifacts:
 
-```yaml
-- name: Verify signed instruction artifacts
-  run: |
-    python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+```bash
+python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
 ```
 
-## Recommended full check order
+2. Run unit tests:
 
-1. Verify signed artifacts (`sie_verify.py ... --check-file`)
-2. Run unit tests (`python -m unittest discover -s tests -p "test_*.py" -v`)
+```bash
+python -m unittest discover -s tests -p "test_*.py" -v
+```
+
+3. Run clean-environment packaging/install smoke:
+
+```bash
+./scripts/smoke_release.sh
+```
+
+## GitHub Actions reference
+
+Use `.github/workflows/ci.yml` with two jobs:
+
+- `test-and-verify`: editable install + verification + tests
+- `release-gate`: isolated venv, wheel build/install, CLI smoke checks
 
 ## Failure behavior
 
@@ -25,21 +37,11 @@ CI should fail if:
 - signature is invalid
 - file hash does not match signed payload
 - envelope is malformed
-
-## Optional hardening
-
-- Enforce helper script in CI:
-
-```yaml
-- name: Run full validation
-  run: |
-    chmod +x scripts/validate_all.sh
-    ./scripts/validate_all.sh
-```
-
-- Add branch protection requiring CI green before merge.
+- package cannot build/install in a fresh environment
+- installed CLI entrypoint (`sie-verify`) fails
 
 ## Notes
 
 - Keep trusted issuer keyring in repo only if public keys are intended to be public.
 - Never commit private signing keys.
+- Protect release branches by requiring both CI jobs green before merge/tag.

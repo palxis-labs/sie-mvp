@@ -1,0 +1,17 @@
+# Failure mode validation run 20260214-1710Z
+
+## baseline
+[OK] Signature verified and basic checks passed.
+exit:0
+
+## untrusted issuer
+[FAIL] Issuer 'palxislabs' is not trusted.
+exit:2
+
+## malformed envelope
+[FAIL] Envelope file is not valid JSON: tmp_bad.sie.json
+exit:3
+
+## missing check-file
+[FAIL] Check file not found: DOES_NOT_EXIST.md
+exit:3

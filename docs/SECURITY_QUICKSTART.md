@@ -22,8 +22,9 @@ If you get `[OK]`, signature + issuer + file integrity checks passed.
 
 ### Linux/macOS
 ```bash
-./scripts/verify.sh
+PYTHON_BIN=.venv/bin/python ./scripts/verify.sh
 ```
+(Or activate your environment first and run `./scripts/verify.sh`.)
 
 ---
 

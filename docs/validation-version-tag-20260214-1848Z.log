@@ -1,0 +1,11 @@
+# Validation run 20260214-1848Z
+$ .venv/bin/python sie_verify.py --file SKILL.md.sie.json --trusted-issuers trusted_issuers.json --check-file SKILL.md
+[OK] Signature verified and basic checks passed.
+
+$ .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+
+$ grep -n '^version\s*=\s*' pyproject.toml
+7:version = "0.1.0"
+
+$ git tag --list 'v0.1.0'
+v0.1.0
