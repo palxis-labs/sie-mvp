@@ -67,6 +67,23 @@ See: `THREAT_MODEL.md`
 - `docs/OPENCLAW_INTEGRATION.md` — integration design for loader enforcement
 
 ---
+## Install the latest release
+
+### Option A — Latest RC (v0.1.0-rc1)
+Use this if you want the newest release candidate:
+
+```bash
+python3 -m pip install "git+https://github.com/palxis-labs/sie-mvp.git@v0.1.0-rc1"
+```
+
+### Option B — Pinned wheel (same RC)
+
+```bash
+python3 -m pip install "https://github.com/palxis-labs/sie-mvp/releases/download/v0.1.0-rc1/sie_mvp-0.1.0-py3-none-any.whl"
+```
+
+If the GitHub Release page is not published yet, use Option A immediately; it installs directly from the tagged source.
+
 ## Quickstart
 
 > **Windows PowerShell:** `& .\.venv\Scripts\Activate.ps1`  
